@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>P</title>
+  <style>
+    body {
+      background: #f9fafc;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #lyrics-box {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+      padding: 2em 2.5em;
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    #lyrics-content {
+      display: flex;
+      gap: 2em;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    #lyrics {
+      flex: 1;
+      font-size: 1.5em;
+      font-family: 'Segoe UI', 'Noto Sans Thai', sans-serif;
+      white-space: pre-line;
+      color: #222;
+      line-height: 1.7;
+      min-height: 12em;
+    }
+
+    #lyrics-image {
+      width: 250px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+      object-fit: cover;
+    }
+
+    h1 {
+      font-family: inherit;
+      font-size: 2em;
+      margin-bottom: 1em;
+      color: #3a5a99;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      #lyrics-content {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #lyrics-image {
+        width: 100%;
+        max-width: 300px;
+        margin-top: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="lyrics-box">
+    <div id="lyrics-content">
+      <div id="lyrics"></div>
+      <img id="lyrics-image" src="https://github.com/GodjiKung/P/blob/main/22d7ed7da924b6e41f9bb32bfbe4937e_0.jpg?raw=true" alt="Day One Cover" />
+    </div>
+  </div>
+
+  <script>
+    const verses = [
+      {
+        text: `มันเริ่มจากการทักทาย
+จากคนที่ไม่รู้ใจ
+สู่การเรียนรู้กัน
+จนกลายมาเป็นโลกทั้งใบ
+และเท่าที่ฉันพูดไป
+เธอยังคิดว่ามันง่ายอยู่หรือเปล่า?`,
+        delayAfter: 5000 // 18 วินาที
+      },
+      {
+        text: `มันเริ่มจากความเข้าใจ
+จากที่ไม่เคยเข้าใจ
+สู่การยอมรับฟัง
+และพร้อมให้อภัย
+ก่อนที่เธอต้องไป
+อยากให้เธอทบทวนมันอีกครั้ง`,
+        delayAfter: 5000
+      },
+      {
+        text: `จำได้ไหมในวัน
+ที่รักของเรานั้นหอมหวาน
+นึกถึงคราที่เรา
+สองคนได้เคยตกหลุมรัก
+Feeling like DAY ONE
+ฉันยังคงนึกถึง DAY ONE
+วันที่เราทั้งสองมีกัน`,
+        delayAfter: 5000
+      },
+      {
+        text: `ก็เพราะความไม่เข้าใจ
+ทำให้เราสองเป็นแบบนี้
+แต่ฉันไม่เคยต้องการ
+ให้เธอหายไปจากชีวิต
+Feeling like DAY ONE
+อยากให้เธอนึกถึง DAY ONE
+กว่าที่เราจะได้รักกัน`,
+        delayAfter: 5000
+      },
+      {
+        text: `เพราะมันไม่ใช่ทุกคน
+ที่จะได้ครอบครองหัวใจของเราสองคน
+ในวันที่ความรักของเราทั้งสองหมองหม่น
+ขอเพียงเธอไม่ปล่อยมือที่กุมไว้`,
+        delayAfter: 5000
+      },
+      {
+        text: `ผ่านการเรียนรู้นับร้อยพัน
+ปฏิทินนานนับร้อยวัน
+กี่ค่ำคืนที่ผ่านพ้นจันทร์
+กว่าเราจะได้มีกันและกัน
+ก่อนที่เธอจะไปจากฉัน
+อยากให้เธอทบทวนมันอีกครั้ง`,
+        delayAfter: 5000
+      }
+    ];
+
+    const container = document.getElementById('lyrics');
+    let verseIndex = 0;
+    let charIndex = 0;
+
+    function typeVerse() {
+      const verse = verses[verseIndex];
+      if (charIndex < verse.text.length) {
+        container.textContent += verse.text[charIndex];
+        charIndex++;
+        setTimeout(typeVerse, 70);
+      } else {
+        // เมื่อพิมพ์ครบกลอน
+        setTimeout(() => {
+          container.textContent = '';
+          charIndex = 0;
+          verseIndex = (verseIndex + 1) % verses.length;
+          setTimeout(typeVerse, 500);
+        }, verse.delayAfter);
+      }
+    }
+
+    typeVerse();
+  </script>
+</body>
+</html>
